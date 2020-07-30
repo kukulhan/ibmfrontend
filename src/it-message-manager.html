@@ -1,0 +1,160 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="it-message-manager">
+
+  <template>
+
+    <iron-ajax
+      auto
+      method="GET"
+      url="[[serverUrl]]"
+      on-response="_testServerAvailability"
+      handle-as="json"
+      debounce-duration="300">
+    </iron-ajax>
+    <iron-ajax
+      id="postToBot"
+      method="POST"
+      url="[[_conversationsUrl]]"
+      body="{{_stringBody}}"
+      on-response="_botReply"
+      handle-as="json"
+      content-type="application/json"
+      debounce-duration="300">
+    </iron-ajax>
+
+  </template>
+
+  <script>
+    /**
+     * `it-message-manager`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ItMessageManager extends Polymer.Element {
+      static get is() { return 'it-message-manager'; }
+      static get properties() {
+        return {
+          intent: {
+            type: String,
+            observer: '_intentChanged',
+          },
+          data: {
+            type: Array,
+            value: [],
+          },
+          _stringBody: {
+            type: String,
+            computed: '_stringify(_body)',
+          },
+          _body: {
+            type: Object,
+            computed: '_getBody(intent)',
+            observer: '_bodyChanged',
+          },
+
+          // BOT
+          // Unique id for each user/connection
+          // Used by the server to handle different and simultaneous conversations
+          // with each id
+          serverUrl: String,
+          _userId: {
+            type: Number,
+            value() {
+              return Date.now();
+            },
+            readOnly: true,
+          },
+          _conversationsUrl: {
+            type: String,
+            computed: '_createConversationURL(serverUrl, _userId)',
+          },
+        };
+      }
+      _buildMsg (text, type, response, payload) {
+
+
+        return this.push('data', {
+          text: text,
+          type: type,
+          response: response,
+          payload: payload,
+        });
+
+
+      }
+      // BOT FUNCTIONS
+      _createConversationURL(serverUrl, userId) {
+        console.log("server "+serverUrl)
+        console.log("userid "+userId)
+       return serverUrl
+     //  return "localhost:3000/api/v1/message"
+
+      }
+
+      // Tests if the chatbot server is online
+      _testServerAvailability(response, detail) {
+        console.log("Testing server availability...");
+        console.log("Chatbot online. Version : " + detail.response.version);
+      }
+
+      // Send a post request to the bot's http server
+      _bodyChanged(newVal, oldVal) {
+        if(newVal != null && 'text' in newVal) {
+          this.$.postToBot.generateRequest();
+        }
+      }
+      _intentChanged(newVal, oldVal) {
+        this._buildMsg(newVal, "text", false, {});
+      }
+      // Parse json reply and display it
+      _botReply(response, detail) {
+        const listReplies = detail.response;
+        const nbReplies = listReplies.length;
+
+        this._buildMsg(listReplies.generic[0].text, "text", true, {});
+
+
+/*
+       for (let i = 0; i < nbReplies; i++) {
+          console.log(listReplies[i].text);
+          if (listReplies[i].text.includes("Image:")){
+            if (listReplies[i].text.includes("Video:")){
+              this._buildMsg("Image: ", "video", true, listReplies[i].text.split("Video:").pop());
+            } else {
+              this._buildMsg("Video: ", "image", true, listReplies[i].text.split("Image:").pop());
+            }
+          } else {
+            this._buildMsg(listReplies[i].text, "text", true, {});
+          }
+          if ("data" in listReplies[i]) {
+            for (let j = 0; j< listReplies[i].data.length; j++) {
+              console.log(listReplies[i].data[j].title);
+              this._buildMsg(listReplies[i].data[j].title, "button", true, listReplies[i].data[j].payload);
+            }
+          }
+        }*/
+
+
+
+      }
+      _stringify(_body) {
+
+        return JSON.stringify(_body);
+      }
+      _getBody (intent) {
+        return {
+          text: intent,
+          sessionid: sessionStorage.getItem("tokenIBM")
+        };
+      }
+    }
+
+    window.customElements.define(ItMessageManager.is, ItMessageManager);
+  </script>
+
+</dom-module>

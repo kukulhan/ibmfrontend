@@ -1,0 +1,208 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="it-message-list.html">
+<link rel="import" href="it-message-input.html">
+<link rel="import" href="it-message-manager.html">
+
+<dom-module id="it-chatbot">
+
+  <template>
+
+    <style>
+      :host {
+        --value-top-mobile:10vh;
+        display: inline-block;
+        height: 520px;
+        width: 320px;
+        position: relative;
+        overflow: hidden;
+        background-color: white;
+        -webkit-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.5);
+                box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.5);
+        -webkit-transition: 0.3s ease;
+        transition: 0.3s ease;
+      }
+      .nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        z-index: 100;
+        -webkit-transition: 0.3s ease;
+        transition: 0.3s ease;
+      }
+      .nav .default-nav {
+        height: 64px;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 110;
+        background-color: #172C50;
+        border-bottom: 3px solid #2c569e;
+        color: #ffffff;
+        -webkit-box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1);
+        box-shadow: 0px 3px 3px 0px rgba(50, 50, 50, 0.1);
+        -webkit-transition: 0.3s ease;
+        transition: 0.3s ease;
+      }
+      .nav .default-nav .main-nav {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 64px;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        -webkit-transition: 0.3s ease;
+        transition: 0.3s ease;
+      }
+      .nav .default-nav .main-nav .toggle {
+        height: 32px;
+        width: 32px;
+        background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/104946/ic_arrow_back_white_48dp.png);
+        background-size: contain;
+        margin: 16px;
+        float: left;
+      }
+      .nav .default-nav .main-nav .toggle:hover {
+        cursor: pointer;
+      }
+      .nav .default-nav .main-nav .options {
+        height: 32px;
+        width: 32px;
+        background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/104946/ic_more_vert_white_48dp.png);
+        background-size: contain;
+        margin: 16px;
+        position: absolute;
+        right: 0;
+      }
+      .nav .default-nav .main-nav .options:hover {
+        cursor: pointer;
+      }
+      .nav .default-nav .main-nav .main-nav-item {
+        float: left;
+        height: 64px;
+        margin-right: 50px;
+        position: relative;
+        line-height: 64px;
+        -webkit-transition: 0.3s ease;
+        transition: 0.3s ease;
+      }
+      .nav .default-nav .main-nav .main-nav-item .main-nav-item-link {
+        display: block;
+        margin-left: 60px;
+        position: relative;
+        height: 64px;
+        width: 100%;
+        text-align: center;
+        line-height: 64px;
+        text-decoration: none;
+        color: inherit;
+        -webkit-transition: 0.3s ease;
+        transition: 0.3s ease;
+      }
+      .inner {
+        height: 410px;
+        padding-top: 64px;
+        background: #f2f2f2;
+        overflow: scroll;
+        -ms-overflow-style: none;
+        overflow: -moz-scrollbars-none;
+      }
+      .bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: #ffffff;
+      }
+      @media (max-width: 767px) {
+        :host {
+          width: 100%;
+          height: 100%;
+          height: var(--value-top-mobile);
+          top: 0;
+          left: 0;
+          -webkit-transform: translateX(0);
+                  transform: translateX(0);
+        }
+        .inner {
+          height: 100%;
+          height: 100vh;
+        }
+      }
+    </style>
+
+    <nav class="nav">
+      <div class="default-nav">
+        <div class="main-nav">
+          <div class="main-nav-item" style="cursor:pointer;"><a class="main-nav-item-link" on-click="_eventCloser" >¡Hola! Soy Watson</a></div>
+        </div>
+      </div>
+    </nav>
+    <div class="inner" id="inner">
+      <it-message-list on-button-tapped="_askBot" messages="[[_messages]]" id="inner"></it-message-list>
+    </div>
+    <div class="bottom">
+      <it-message-input on-user-submit="_askBot"></it-message-input>
+    </div>
+
+    <it-message-manager server-url="{{serverUrl}}" intent="[[_intent]]" data="{{_messages}}"></it-message-manager>
+
+  </template>
+
+  <script>
+   /**
+    * `it-chatbot`
+    *
+    *
+    * @customElement
+    * @polymer
+    * @demo demo/index.html
+    */
+   class ItChatbot extends Polymer.Element {
+     static get is() { return 'it-chatbot'; }
+     static get properties() {
+       return {
+         _messages: {
+           type: Array,
+           value: [],
+         },
+         _intent: String,
+         serverUrl: String,
+         flagCloser:{
+           type: Boolean,
+           value: false
+         }
+       };
+     }
+     _askBot(event, detail) {
+       this._intent = detail;
+       //this.$.inner.scrollIntoView(this._messages[_messages.length-1]);
+     }
+     _eventCloser(){
+       if (!this.flagCloser){
+         this.flagCloser = true;
+         this.updateStyles({'--value-top-mobile' : '110vh'});
+       }else{
+         this.flagCloser = false;
+         this.updateStyles({'--value-top-mobile' : '10vh'});
+       }
+       this.dispatchEvent(
+         new CustomEvent('event-closer',{
+           bubbles: true, composed: true,
+           detail: {
+             chat_close: this.flagCloser
+           }
+         })
+       )
+     }
+   }
+
+   window.customElements.define(ItChatbot.is, ItChatbot);
+ </script>
+
+</dom-module>

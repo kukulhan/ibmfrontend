@@ -1,0 +1,843 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="timer-days.html">
+
+
+
+
+
+<link rel="import" href="shop-button.html">
+<link rel="import" href="shop-category-data.html">
+<link rel="import" href="shop-common-styles.html">
+<link rel="import" href="shop-image.html">
+<link rel="import" href="shop-select.html">
+<link rel="import" href="shop-input.html">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<dom-module id="shop-detail">
+
+
+  <template>
+
+    <style include="shop-common-styles shop-button shop-form-styles shop-input shop-select shop-checkbox">
+      :host {
+        display: block;
+      }
+
+      #content {
+        @apply --layout-horizontal;
+        @apply --layout-center-justified;
+      }
+
+      shop-image {
+        position: relative;
+        margin: 64px 32px;
+        width: 50%;
+        max-width: 600px;
+
+        --shop-image-img: {
+          @apply --layout-fit;
+        }
+
+        ;
+      }
+
+      shop-image::before {
+        content: "";
+        display: block;
+        padding-top: 100%;
+      }
+
+      .detail {
+        margin: 64px 32px;
+        width: 50%;
+        max-width: 400px;
+        transition: opacity 0.4s;
+        opacity: 0;
+      }
+
+      .detail[has-content] {
+        opacity: 1;
+      }
+
+      h1 {
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 28px;
+        margin: 0;
+      }
+
+      .price {
+        margin: 16px 0 40px;
+        font-size: 16px;
+        color: var(--app-secondary-color);
+      }
+
+      .description {
+        margin: 32px 0;
+      }
+
+      .description>h2 {
+        margin: 16px 0;
+        font-size: 13px;
+      }
+
+      .description>p {
+        margin: 0;
+        color: var(--app-secondary-color);
+      }
+
+      .pickers {
+        @apply --layout-vertical;
+        border-top: 1px solid #ccc;
+      }
+
+      shop-select>select {
+        font-size: 16px;
+        padding: 16px 24px 16px 70px;
+      }
+
+      @media (max-width: 767px) {
+
+        #content {
+          @apply --layout-vertical;
+          @apply --layout-center;
+        }
+
+        shop-image {
+          margin: 0;
+          width: 80%;
+        }
+
+        .detail {
+          box-sizing: border-box;
+          margin: 32px 0;
+          padding: 0 24px;
+          width: 100%;
+          max-width: 600px;
+        }
+
+        h1 {
+          font-size: 20px;
+          line-height: 24px;
+        }
+
+        .price {
+          font-size: inherit;
+          margin: 12px 0 32px;
+        }
+
+      }
+
+
+
+
+
+      .row {
+        @apply --layout-horizontal;
+        @apply --layout-end;
+      }
+
+      .column {
+        @apply --layout-vertical;
+      }
+
+      .row>.flex,
+      .input-row>* {
+        @apply --layout-flex;
+      }
+
+      .input-row>*:not(:first-child) {
+        margin-left: 8px;
+      }
+
+      .shop-select-label {
+        line-height: 20px;
+      }
+
+      .order-summary-row {
+        line-height: 24px;
+      }
+
+      .total-row {
+        font-weight: 500;
+        margin: 30px 0;
+      }
+
+      .clock {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        color: #17D4FE;
+        font-size: 60px;
+        font-family: Orbitron;
+        letter-spacing: 7px;
+
+
+
+      }
+    </style>
+
+    <!--
+      app-route provides the name of the category and the item.
+    -->
+    <app-route route="[[route]]" pattern="/:category/:item" data="{{routeData}}"></app-route>
+
+    <!--
+      shop-category-data provides the item data for a given category and item name.
+    -->
+    <shop-category-data id="categoryData" category-name="[[routeData.category]]" item-name="[[routeData.item]]"
+      item="{{item}}" failure="{{failure}}"></shop-category-data>
+
+
+
+
+    <div id="content" hidden$="[[failure]]">
+      <shop-image alt="[[item.title]]" src="[[item.largeImage]]"></shop-image>
+
+
+      <div class="detail" has-content$="[[_isDefined(item)]]">
+        <h1>[[item.title]]</h1>
+        <!-- <div class="price">[[_formatPrice(item.price)]]</div> -->
+
+
+        <!-- <div hidden$="[[item.status_campaign]]">-->
+
+        <div hidden$="[[_create(item)]]">
+          <div class="row input-row">
+            <shop-input>
+              <input id="nameCampaing" name="nameCampain" placeholder="Nombre de la campaña" autofocus required
+                aria-labelledby="accountEmailLabel accountInfoHeading" value="{{varNameCampaing::input}}">
+              <shop-md-decorator error-message="El nombre de la campaña es obligatorio" aria-hidden="true">
+                <label id="nameCampaingLabel">Nombre de la campaña</label>
+                <shop-underline></shop-underline>
+              </shop-md-decorator>
+            </shop-input>
+          </div>
+
+          <div class="row input-row">
+            <shop-input>
+              <input id="descriptionCampaing" name="descriptionCampain" placeholder="Descripcion de la campaña"
+                aria-labelledby="accountEmailLabel accountInfoHeading" value="{{varDescriptionCampaing::input}}">
+
+              <shop-md-decorator aria-hidden="true">
+                <label id="descriptcionCampaingLabel">Descripcion de la campaña</label>
+                <shop-underline></shop-underline>
+              </shop-md-decorator>
+            </shop-input>
+          </div>
+
+          <div class="row input-row">
+            <shop-input>
+              <input id="hashtagCampaing" name="hashtagCampain" placeholder="Hashtags" autofocus required
+                aria-labelledby="accountEmailLabel accountInfoHeading" on-click="_message"
+                value="{{varHashtagCampaing::input}}">
+              <shop-md-decorator error-message="Hashtags son obligatorios" aria-hidden="true">
+                <label id="hashtagCampaingLabel">Hashtag</label>
+                <shop-underline></shop-underline>
+              </shop-md-decorator>
+            </shop-input>
+          </div>
+
+          <div hidden$="[[item.flagForDon]]">
+            <div class="description">
+              <h1>Dirección</h1>
+            </div>
+
+            <div class="row input-row">
+              <shop-input>
+                <input id="streetCampaing" name="streetCampain" placeholder="Calle" autofocus required
+                  aria-labelledby="accountEmailLabel accountInfoHeading" value="{{varStreetCampaing::input}}">
+                <shop-md-decorator error-message="La calle es obligatoria" aria-hidden="true">
+                  <label id="streetCampaingLabel">Calle</label>
+                  <shop-underline></shop-underline>
+                </shop-md-decorator>
+              </shop-input>
+            </div>
+
+            <div class="row input-row">
+              <shop-input>
+                <input id="zipCodeCampaing" name="zipCodeCampain" placeholder="Codigo Postal" autofocus required
+                  aria-labelledby="accountEmailLabel accountInfoHeading" value="{{varZipCodeCampaing::input}}">
+                <shop-md-decorator error-message="El codigo postal es obligatorio" aria-hidden="true">
+                  <label id="zipCodeCampaingLabel">Codigo postal</label>
+                  <shop-underline></shop-underline>
+                </shop-md-decorator>
+              </shop-input>
+            </div>
+
+
+            <div class="row input-row">
+              <shop-input>
+                <input id="referencesCampaing" name="referencesCampain" placeholder="Referencias" autofocus required
+                  aria-labelledby="accountEmailLabel accountInfoHeading" value="{{varRefCampaing::input}}">
+                <shop-md-decorator aria-hidden="true">
+                  <label id="referencesCampaingLabel">Referencias de la direccion</label>
+                  <shop-underline></shop-underline>
+                </shop-md-decorator>
+              </shop-input>
+            </div>
+
+          </div>
+
+          <div class="pickers">
+            <label id="timeLabel" prefix>Tiempo de campaña</label>
+            <shop-select>
+
+              <select id="timeSelect" aria-labelledby="timeLabel" value="{{varTimeCampaing::input}}">
+                <option value="24" selected>24 Horas</option>
+                <option value="72">72 Horas</option>
+              </select>
+              <shop-md-decorator aria-hidden="true">
+                <shop-underline></shop-underline>
+              </shop-md-decorator>
+            </shop-select>
+          </div>
+
+          <br>
+          <br>
+          <!--
+          <div class="description">
+            <h2>Description</h2>
+            <p id="desc"></p>
+          </div>
+        -->
+          <shop-button responsive>
+            <button on-click="_addToCart" aria-label="Crear campaña">¡CREAR!</button>
+          </shop-button>
+
+        </div>
+
+
+
+        <!--<div hidden$="[[!item.status_campaign]]">-->
+        <div hidden$="[[_resutl(item)]]">
+          <br>
+          <div>
+            <h2>Información de campaña</h2>
+          </div>
+          <br>
+          <timer-days id="timer" lang="es" before="Tiempo restante"></timer-days><br>
+          <div hidden$="[[!isSympathizer]]">
+           contacto: <h2>{{contact}}</h2>
+          </div>
+          Nombre de la campaña: <h2>{{nameCampaing}}</h2>
+          Descripción de la campaña: <h2> {{description}}</h2>
+          Hashtags: <h2>{{hashtag}} </h2>
+
+          <div hidden$="[[item.flagForDon]]">
+            <div class="description">
+              <h1>Dirección</h1>
+            </div>
+
+            Calle: <h2>{{street}} </h2>
+            Codigo Postal: <h2>{{zipCode}}</h2>
+            Referencias: <h2>{{references}} </h2>
+          </div>
+
+          <div hidden$="[[isActive]]">
+
+            <shop-button responsive>
+              <button style="background-color: brown;" on-click="_deleteCampaing"
+                aria-label="Eliminar campaign">¡ELIMINAR!</button>
+            </shop-button>
+
+
+          </div>
+
+          <div hidden$="[[sympathizer]]">
+
+            <shop-button responsive>
+              <button style="background-color:darkslateblue;" on-click="_addSympCampaing"
+                aria-label="Unirme">¡UNIRME!</button>
+            </shop-button>
+
+
+          </div>
+
+
+
+
+
+
+        </div>
+
+
+      </div>
+
+
+
+
+
+      <!--
+      shop-network-warning shows a warning message when the items can't be rendered due
+      to network conditions.
+    -->
+      <shop-network-warning hidden$="[[!failure]]" offline="[[offline]]" on-try-reconnect="_tryReconnect">
+      </shop-network-warning>
+
+
+
+
+      <iron-ajax id="createCamping" method="POST" url="http://localhost:3000/api/v1/createCampaign" body="{{_body}}"
+        on-response="_excecuteData" handle-as="json" content-type="application/json" on-error="_handleErrorResponse"
+        debounce-duration="300">
+      </iron-ajax>
+
+      <iron-ajax id="getCamping" method="POST" url="http://localhost:3000/api/v1/getCampaign" body="{{_bodyGet}}"
+        on-response="_excecuteDataGet" handle-as="json" content-type="application/json" on-error="_handleErrorResponse"
+        debounce-duration="300">
+      </iron-ajax>
+
+      <iron-ajax id="getCampingFromList" method="POST" url="http://localhost:3000/api/v1/getCampaignList"
+        body="{{_bodyGetList}}" on-response="_excecuteDataGet" handle-as="json" content-type="application/json"
+        on-error="_handleErrorResponse" loading="{{_cargando}}" debounce-duration="300">
+      </iron-ajax>
+
+      <iron-ajax id="deleteCampaing" method="POST" url="http://localhost:3000/api/v1/deleteCampaign"
+        body="{{_bodyDelete}}" on-response="_excecuteDelete" handle-as="json" content-type="application/json"
+        on-error="_handleErrorResponse" debounce-duration="300">
+      </iron-ajax>
+
+      <iron-ajax id="addSympathizers" method="POST" url="http://localhost:3000/api/v1/addSympathizers"
+        body="{{_bodyGetList}}" on-response="_excecuteAddSympathizers" handle-as="json" content-type="application/json"
+        on-error="_handleErrorResponse" debounce-duration="300">
+      </iron-ajax>
+
+
+
+
+
+  </template>
+
+
+  <script>
+
+    class ShopDetail extends Polymer.Element {
+
+      static get is() { return 'shop-detail'; }
+
+      static get properties() {
+        return {
+
+          item: Object,
+
+          route: Object,
+
+          routeData: Object,
+
+          visible: {
+            type: Boolean,
+            value: false
+          },
+
+          offline: {
+            type: Boolean,
+            observer: '_offlineChanged'
+          },
+
+          failure: Boolean,
+
+          _body: {
+            type: String,
+            computed: '_stringBody(item,varNameCampaing,varDescriptionCampaing,varHashtagCampaing,varStreetCampaing,varZipCodeCampaing,varRefCampaing,varTimeCampaing)'
+          },
+
+          _bodyGet: {
+            type: String,
+            computed: '_stringBodyGet()'
+          },
+          _bodyGetList: {
+            type: String,
+            computed: '_stringBodyGetList(hash)'
+          },
+          _bodyDelete: {
+            type: String,
+            computed: '_stringBodyGet()'
+          },
+
+          varNameCampaing: { type: String },
+          varDescriptionCampaing: { type: String },
+          varHashtagCampaing: { type: String },
+          varStreetCampaing: { type: String },
+          varZipCodeCampaing: { type: String },
+          varRefCampaing: { type: String },
+          varTimeCampaing: { type: String },
+
+          nameCampaing: String,
+          description: String,
+          hashtag: String,
+          street: String,
+          zipCode: String,
+          references: String,
+          time: String,
+          hast: String,
+          dataFromList: Boolean,
+          isActive: {
+            type: Boolean,
+            value: true
+          },
+          sympathizer: {
+            type: Boolean,
+            value: true
+          },
+          contact:String,
+          isSympathizer: {type: Boolean,
+            value: true
+          }
+
+
+
+        }
+      }
+
+      static get observers() {
+        return [
+          '_itemChanged(item, visible)'
+        ]
+      }
+
+
+      _addSympCampaing() {
+        this.$.addSympathizers.generateRequest();
+      }
+
+      _excecuteAddSympathizers() {
+        swal.fire({
+
+          imageUrl: '../images/fuerza-mexico.png',
+          title: '¡Felicidades!',
+          html: "Ya eres parte de la campaña, te compartimos el correo electornico de contacto para mas informacion. <br> Contacto: <b>"+this.contact+"</b> ",
+          showConfirmButton: true,
+          confirmButtonText: 'Ir a las campañas',
+          allowOutsideClick: false
+        }).then((result) => {
+          if (result.value) {
+            window.location.href = "http://127.0.0.1:8081/cart"
+          }
+        });
+
+   
+
+      }
+
+
+      _isHidden(item) {
+        if (item.status_create && !item.status_campaign) {
+          return false;
+        }
+        return true
+
+      }
+
+      _deleteCampaing() {
+        this.$.deleteCampaing.generateRequest();
+      }
+      _excecuteDelete() {
+        swal.fire({
+          icon: 'success',
+          title: 'La campaña se ha eliminado exitosamente. Ya puede crear una nueva campaña.',
+          showConfirmButton: false,
+        })
+
+        setTimeout(function () {
+          window.location.href = "http://127.0.0.1:8081/"
+        }, 3000);
+
+      }
+
+
+
+
+
+      _create(item) {
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('5edffab20548a141e1702336ba6420b1');
+
+        if (myParam != null) {
+          return true;
+        }
+
+        if (!item.status_campaign) {
+          return false;
+        }
+        else {
+          return true;
+        }
+
+
+      }
+
+      _resutl(item) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('5edffab20548a141e1702336ba6420b1');
+
+        if (myParam != null) {
+          return false;
+        }
+        if (!item.status_campaign) {
+          return true;
+        }
+
+
+      }
+
+
+
+
+      _excecuteDataGet(response, detail) {
+        this.isActive = detail.response.isActive != null ? detail.response.isActive : true;
+        if (!detail.response.isOwn && !detail.response.isSympathizer) {
+          this.sympathizer = true
+        }
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('5edffab20548a141e1702336ba6420b1');
+        if(myParam != null)
+        {
+          this.contact=detail.response.user_email
+        }
+
+        if (!detail.response.isSympathizer && !detail.response.isOwn && myParam != null) { this.sympathizer = false }
+
+
+        this.nameCampaing = detail.response.campaign.nameUserCampaing
+        this.description = detail.response.campaign.description
+        this.hashtag = detail.response.campaign.hashtags
+        this.street = detail.response.campaign.address_campaign.street
+        this.zipCode = detail.response.campaign.address_campaign.cp
+        this.references = detail.response.campaign.address_campaign.references
+        this.time = detail.response.day_finish.replace(' ', 'T')
+
+
+        this.$.timer._setTime(this.time)
+        console.log(detail.response)
+
+        detail.response.isOwn //es mia 
+        this.isSympathizer=detail.response.isSympathizer //ya soye esoty denteo
+
+
+
+      }
+
+      _message() {
+        let timerInterval
+        Swal.fire({
+          title: "Considera...",
+          text: "Solo se tomarán los primeros 8 hashtag",
+          type: 'info',
+          imageUrl: '../images/hash.jpg',
+          timer: 2000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+          onBeforeOpen: () => {
+            timerInterval = setInterval(() => {
+              const content = Swal.getContent()
+              if (content) {
+                const b = content.querySelector('b')
+                if (b) {
+                  b.textContent = Swal.getTimerLeft()
+                }
+              }
+            }, 100)
+          },
+          onClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
+        })
+        this.$.hashtagCampaing.focus();
+      }
+
+      _itemChanged(item, visible) {
+
+
+        this.sympathizer = true
+        this.isActive = true
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const myParam = urlParams.get('5edffab20548a141e1702336ba6420b1');
+
+        if (myParam != null) {
+
+          this.hash = myParam;
+          this.$.getCampingFromList.generateRequest();
+        }
+        else {
+          this.$.getCamping.generateRequest();
+        }
+
+        if (visible) {
+
+
+          this._itemChangeDebouncer = Polymer.Debouncer.debounce(this._itemChangeDebouncer,
+            Polymer.Async.microTask, () => {
+              // The item description contains escaped HTML (e.g. "&lt;br&gt;"), so we need to
+              // unescape it ("<br>") and set it as innerHTML.
+              let text = item ? item.description : '';
+              this.$.desc.innerHTML = this._unescapeText(text);
+
+
+
+              // Reset the select menus.
+              //this.$.quantitySelect.value = '1';
+              //this.$.sizeSelect.value = 'M';
+
+              this.dispatchEvent(new CustomEvent('change-section', {
+                bubbles: true, composed: true, detail: {
+                  category: item ? item.category : '',
+                  title: item ? item.title : ''
+                }
+              }));
+            });
+
+
+        }
+
+
+      }
+
+
+
+
+
+
+      _unescapeText(text) {
+        let elem = document.createElement('textarea');
+        elem.innerHTML = text;
+        return elem.textContent;
+      }
+
+      _formatPrice(price) {
+        return price ? '$' + price.toFixed(2) : '';
+      }
+
+      _addToCart() {
+        // This event will be handled by shop-app.
+
+
+        this.$.createCamping.generateRequest();
+
+        /*
+                this.dispatchEvent(new CustomEvent('add-cart-item', {
+                  bubbles: true, composed: true, detail: {
+                    item: this.item,
+                    quantity: parseInt(this.$.quantitySelect.value, 10),
+                    size: this.$.sizeSelect.value
+                  }
+                }));
+                */
+      }
+
+
+      _stringBody(item, varNameCampaing, varDescriptionCampaing, varHashtagCampaing, varStreetCampaing, varZipCodeCampaing, varRefCampaing, varTimeCampaing) {
+
+        if (item == null) {
+          return null;
+        }
+
+
+        return {
+          user_email: sessionStorage.getItem("user_email"),
+          token: sessionStorage.getItem("tokenIBM"),
+          volunteers: [],
+          campaign: {
+            id_campaign: item.id_campaign,
+            name_campaign: item.name_campaign,
+            category_campaign: item.name,
+            nameUserCampaing: varNameCampaing,
+            description: varDescriptionCampaing,
+            hashtags: varHashtagCampaing,
+            address_campaign: {
+              street: varStreetCampaing,
+              cp: varZipCodeCampaing,
+              references: varRefCampaing,
+              latitude: "",
+              longitude: ""
+            }
+          },
+          time_campaign: varTimeCampaing != null ? varTimeCampaing : 24
+
+        };
+      }
+
+      _stringBodyGet() {
+        return {
+          user_email: sessionStorage.getItem("user_email"),
+          token: sessionStorage.getItem("tokenIBM")
+        }
+      }
+
+      _stringBodyGetList(hash) {
+        return {
+          user_email: hash,
+          sympathizer: sessionStorage.getItem("user_email"),
+          token: sessionStorage.getItem("tokenIBM")
+        }
+      }
+
+
+      _excecuteData() {
+
+
+        swal.fire({
+          icon: 'success',
+          title: 'La campaña se ha creado exitosamente.',
+          showConfirmButton: false,
+        })
+
+        setTimeout(function () {
+          window.location.href = "http://127.0.0.1:8081/"
+        }, 2000);
+
+
+      }
+
+
+      _handleErrorResponse(event) {
+
+        console.log("ddatos")
+
+      }
+
+      _isDefined(item) {
+        return item != null;
+      }
+
+      _tryReconnect() {
+        this.$.categoryData.refresh();
+      }
+
+      _offlineChanged(offline) {
+        if (!offline) {
+          this._tryReconnect();
+        }
+      }
+
+    }
+
+    customElements.define(ShopDetail.is, ShopDetail);
+
+
+  </script>
+
+
+
+
+</dom-module>

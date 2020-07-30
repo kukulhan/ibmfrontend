@@ -1,0 +1,161 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<dom-module id="shop-create-user">
+  <template>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../resources/css/login.css">
+    <div class="limiter">
+      <div class="wrap-login200">
+        <div class="row">
+          <div>
+            <div>
+               <label>Apellidos <a style="color:red">*</a> </label>
+               <input required type="text" value="{{lastName::input}}" class="form-control" size="30"
+               placeholder="Apellidos" autofocus>
+            </div>
+
+            <div>
+               <label>Nombre<a style="color:red">*</a> </label>
+               <input required type="text" value="{{name::input}}" class="form-control"
+               placeholder="Nombre" autofocus>
+            </div>
+
+            <div>
+               <label>Correo electrónico<a style="color:red">*</a> </label>
+               <input required type="email" value="{{emailValue::input}}" class="form-control"
+               placeholder="Correo electrónico" autofocus>
+            </div>
+
+            <div>
+               <label>Teléfono (opcional)</label>
+               <input required type="text" value="{{phone::input}}" class="form-control"
+               placeholder="Teléfono" autofocus>
+            </div>
+
+            <div>
+               <label>Contraseña<a style="color:red">*</a> </label>
+               <input required type="password" value="{{passwordValue::input}}" class="form-control"
+               placeholder="Escribe tu contraseña" id="myInput" autofocus>
+               <br>
+               <input type="checkbox" on-click="showPassword" size="20"> Mostrar contraseña
+            </div>
+
+            <div class="buttom-create-user">
+              <button class="login100-form-btn" on-click="eventCreateUser" type="button">Registrarse</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+
+  <script>
+  class ShopCreateUser extends Polymer.Element {
+    static get is() { return 'shop-create-user'; }
+    static get properties() {
+      return {
+        name: {
+          type: String
+        },
+        lastName: {
+          type: String
+        },
+        emailValue:{
+          type: String
+        },
+        phone:{
+          type: String,
+          value: ""
+        },
+        passwordValue:{
+          type: String
+        }
+      };
+    }
+
+    flagFields() {
+      if (
+        this.name != null &&
+        this.lastName != null &&
+        this.emailValue != null &&
+        this.phone != null &&
+        this.passwordValue != null) {
+          return true;
+       }
+       else {
+         return false;
+       }
+    }
+
+    eventCreateUser() {
+      if (this.flagFields()){
+        var urlCreate = "http://localhost:3000/api/v1/createUser";
+          /* ------------------ Crea nuevo usuario------------------------ */
+        var requestCreateUser = new XMLHttpRequest();
+        requestCreateUser.open("POST", urlCreate, false);
+        requestCreateUser.setRequestHeader("Accept", "application/json");
+        requestCreateUser.setRequestHeader("Content-Type", "application/json");
+        var createNewUser = {
+          user_name: this.name,
+          user_lastName: this.lastName,
+          user_email:this.emailValue,
+          user_phone:this.phone,
+          user_password:this.passwordValue
+        };
+        var bodyNewUser = JSON.stringify(createNewUser);
+        requestCreateUser.send(bodyNewUser);
+        /* ------------------------------ */
+        if (requestCreateUser.status == 400){
+          swal.fire({
+            icon: 'error',
+            title: "Ooooh cielos...",
+            text: "Al parecer ya esta registrado el correo",
+            type: 'error',
+            showCancelButton: false,
+            showConfirmButton: false
+          })
+        } else {
+          swal.fire({
+            icon: 'success',
+            title: "Te has registrado exitosamente",
+            showCancelButton: false,
+            showConfirmButton: false,
+            timer: 1500
+          });
+          setTimeout(function () {
+            window.location.reload(1);
+          }, 1500);
+        }
+      } else {
+        swal.fire({
+          icon: 'error',
+          title: "Ooooh cielos...",
+          text: "Faltan datos en el registro, verifica e intenta nuevamente.",
+          type: 'error',
+          showCancelButton: false,
+          showConfirmButton: true
+        });
+      }
+    }
+
+    showPassword() {
+      var x = this.shadowRoot.querySelector('#myInput');
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+
+  }
+  window.customElements.define(ShopCreateUser.is, ShopCreateUser);
+
+  </script>
+
+
+</dom-module>

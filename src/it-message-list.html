@@ -1,0 +1,103 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="it-message-card.html">
+
+<dom-module id="it-message-list">
+
+  <template>
+
+    <style>
+      .content {
+        padding: 10.6666666667px;
+        position: relative;
+        margin-bottom: 32px;
+      }
+      .message {
+        padding: 10px;
+        min-height: 30px;
+        width: 60%;
+        margin: 0 10.6666666667px;
+        -webkit-box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.3);
+                box-shadow: 0px 1px 0px 0px rgba(50, 50, 50, 0.3);
+        border-radius: 2px;
+        font-weight: 300;
+        font-size: 15px;
+        position: relative;
+      }
+      .message:before {
+        content: '';
+        width: 0;
+        height: 0;
+        border-style: solid;
+        position: absolute;
+      }
+      .message.them {
+        background: #172C50;
+        float: left;
+        color: #ffffff;
+      }
+      .message.them:before {
+        border-width: 0 10px 10px 0;
+        border-color: transparent #172C50 transparent transparent;
+        left: -10px;
+      }
+      .message.me {
+        background: #ffffff;
+        float: right;
+        color: #545454;
+      }
+      .message.me:before {
+        border-width: 10px 10px 0 0;
+        border-color: #ffffff transparent transparent transparent;
+        right: -10px;
+      }
+    </style>
+
+    <div class="content">
+      <template is="dom-repeat" items="{{messages}}" as="message">
+        <it-message-card
+          class$="{{_getMessageClasses(message)}}"
+          text="[[message.text]]"
+          type="[[message.type]]"
+          payload="[[message.payload]]"
+          response="[[message.response]]">
+        </it-message-card>
+        <br>
+        <br>
+        <br>
+        <br>
+      </template>
+    </div>
+
+  </template>
+
+  <script>
+    /**
+     * `it-message-list`
+     *
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class ItMessageList extends Polymer.Element {
+      static get is() { return 'it-message-list'; }
+      static get properties() {
+        return {
+          messages: {
+            type: Array,
+            value: [],
+          },
+        };
+      }
+      _getMessageClasses(message) {
+        return [
+          'message',
+          message.response ? 'them' : 'me',
+        ].join(' ');
+      }
+    }
+
+    window.customElements.define(ItMessageList.is, ItMessageList);
+  </script>
+
+</dom-module>

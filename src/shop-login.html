@@ -1,0 +1,170 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="shop-create-user.html">
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<dom-module id="shop-login">
+  <template>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../resources/css/login.css">
+    <style>
+    </style>
+    <span hidden$="[[createNewUser]]">
+      <div class="limiter">
+      <div class="container-login100">
+        <div class="wrap-login100">
+          <div class="login100-form-title" style="background-image: url(../images/wall.png);">
+            <span class="login100-form-title-1">Bienvenido a Iknelia</span>
+          </div>
+          <form class="login100-form validate-form">
+            <div class="wrap-input100 validate-input m-b-26">
+              <span class="label-input100">Usuario</span>
+              <input class="input100" type="text" name="username" placeholder="Ingresa tu correo" value="{{email::input}}" required>
+              <span class="focus-input100"></span>
+            </div>
+            <div class="wrap-input100 validate-input m-b-18">
+              <span class="label-input100">Contraseña</span>
+              <input class="input100" type="password" name="pass" placeholder="Contraseña" value="{{password::input}}" required>
+              <span class="focus-input100"></span>
+            </div>
+            <div class="container-login100-form-btn">
+              <button class="login100-form-btn" on-click="doinglogin" type="button">Entrar</button>
+            </div>
+            <p class="label-create" on-click="createAccount">Crear nueva cuenta</p>
+          </form>
+        </div>
+      </div>
+    </div>
+    </span>
+    <span hidden$="[[!createNewUser]]" aling="center">
+      <div class="container">
+        <br>
+        <div class="row">
+            <div class="col-sm-1" aling="center">
+              <button class="login100-form-btn" on-click="eventReturn" type="button">Regresar</button>
+            </div>
+            <div class="col-sm-3" aling="center"></div>
+        </div>
+    </div>
+    <shop-create-user on-myevent="processEvent" id="main"></shop-create-user>
+    </span>
+    <iron-ajax
+      id="doLogin"
+      url="http://localhost:3000/api/v1/login"
+      content-type="application/json"
+      crossDomain: true
+      dataType: 'jsonp'
+      method="POST"
+      handle-as="json"
+      headers="Access-Control-Allow-Headers: *"
+      on-response="responseLoginAjax"
+      on-error="responseErrorAjax"> </iron-ajax>
+    <app-location route="{{route}}"></app-location>
+    <app-route
+      route="{{route}}"
+      pattern="/:page"
+      data="{{routeData}}"
+      tail="{{subroute}}"></app-route>
+  </template>
+
+  <script>
+    class ShopLogin extends Polymer.Element {
+      static get is() { return 'shop-login'; }
+      static get properties() {
+        return {
+          createNewUser: {
+              type: Boolean,
+              value: false
+          },
+          route: {
+            type: Object
+          },
+          routeData: {
+              type: Object
+          },
+          email: {
+            type: String
+          },
+          password: {
+            type: String
+          }
+        };
+      }
+
+      doinglogin() {
+        var loginData = {
+          "user_email" : this.email,
+          "user_password" : this.password
+        };
+        this.$.doLogin.body = JSON.stringify(loginData);
+        this.$.doLogin.generateRequest();
+      }
+
+      responseLoginAjax(requestAjax){
+        if (requestAjax.detail.status == 200){
+          this.routeData.page = 'home';
+          this.dispatchEvent(
+              new CustomEvent(
+                  'eventlogin',
+                  {
+                      detail: {
+                          loginSuccessful: 'true',
+                          user_email: this.email,
+                          tokenIBM: requestAjax.detail.response.tokenIBM
+                      }
+                  }
+              )
+          )
+          swal.fire({
+            icon: 'success',
+            title: "Bienvenido...",
+            showCancelButton: false,
+            showConfirmButton: false,
+            timer: 1500
+          });
+          setTimeout(function () {
+            window.location.reload(1);
+          }, 1500);
+        }else if (requestAjax.detail.status == 201){
+          swal.fire({
+            icon: 'error',
+            title: "Ooooh cielos...",
+            text: "Usuario y/o contraseña incorrecta, verifique de nuevo",
+            type: 'error',
+            showCancelButton: false,
+            showConfirmButton: false
+          });
+        }
+        this.email = "";
+        this.password = "";
+      }
+
+      responseErrorAjax(error) {
+        swal.fire({
+          icon: 'error',
+          title: "Ooooh cielos...",
+          text: "Al parecer no estás registrado. ¡Registrate, es gratis!",
+          type: 'error',
+          showCancelButton: false,
+          showConfirmButton: false
+        });
+      }
+
+      createAccount() {
+        this.createNewUser = true;
+      }
+
+      eventReturn() {
+        this.createNewUser = false;
+      }
+
+    }
+    window.customElements.define(ShopLogin.is, ShopLogin);
+  </script>
+</dom-module>

@@ -1,0 +1,295 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<dom-module id="shop-category-data">
+  <template>
+  <iron-ajax
+  id="getCamping"
+  method="POST"
+  url="http://localhost:3000/api/v1/listCampaign"
+  body="{{_body}}"
+  on-response="_getData"
+  handle-as="json"
+  content-type="application/json"
+  on-error="_handleErrorResponse"
+  debounce-duration="300">
+</iron-ajax>
+
+
+  </template>
+
+
+
+  <script>
+    (function () {
+
+
+
+      var categoryList = [];
+      var subCategoryList = [];
+      var subCategoryShowList = [];
+
+      class ShopCategoryData extends Polymer.Element {
+
+        static get is() { return 'shop-category-data'; }
+
+        static get properties() {
+          return {
+
+            categoryName: String,
+
+            itemName: String,
+
+            createTable: {
+              type: Array,
+              value: function () {
+                return [];
+              }
+            },
+
+            _body: {
+              type: String,
+              computed: '_stringBody()'
+            },
+
+            categories: {
+              type: Array,
+              value: categoryList,
+              readOnly: true,
+              notify: true
+            },
+
+            subCategories: {
+              type: Array,
+              value: subCategoryList,
+              readOnly: true,
+              notify: true
+            },
+
+            subCategoriesShow: {
+              type: Array,
+              value: subCategoryShowList
+            },
+
+            category: {
+              type: Object,
+              computed: '_computeCategory(categoryName)',
+              notify: true
+            },
+
+            item: {
+              type: Object,
+              computed: '_computeItem(category.items, itemName)',
+              notify: true
+            },
+
+            failure: {
+              type: Boolean,
+              notify: true,
+              readOnly: true
+            }
+
+          
+
+
+          }
+        }
+
+
+
+        executeGetCampaing() {
+          this.$.getCamping.generateRequest();
+        }
+        _getData(response, detail) {
+          for (let valueResponse of detail.response) {
+            var obj = {
+              name: valueResponse.name_module,
+              title: valueResponse.name_campaign,
+              image: valueResponse.link_images,
+              category_id: valueResponse.category_id,
+              statuscampaign: valueResponse.status_campaign != null ? true : false
+
+            }
+
+            this.push('categories', obj);
+
+              for (let subCategoriesdata of valueResponse.categories) {
+               
+                var objsub =
+                {
+                  id_campaign: subCategoriesdata.id_campaign,
+                  name: valueResponse.title,
+                  title: subCategoriesdata.category_campaign,
+                  category: valueResponse.name_module,
+                  price: 13.30,
+                  description: "The best of three fabrics combined into one seductively-soft tee.&amp;nbsp;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;Features:&lt;/div&gt;&lt;div&gt;&lt;ul&gt;&lt;li&gt;50% polyester, 25% combed and ring-spun cotton, 25% rayon.&lt;/li&gt;&lt;li&gt;Side-seamed.&lt;/li&gt;&lt;li&gt;Semi-relaxed fit.&amp;nbsp;&lt;/li&gt;&lt;li&gt;Available in heather blue with the white Google Chrome logo screenprinted at center chest.&amp;nbsp;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;",
+                  image: subCategoriesdata.category_images,
+                  largeImage: subCategoriesdata.category_images,
+                  name_campaign: valueResponse.name_campaign,
+                  status_campaign: valueResponse.status_campaign != null ? true : false,
+                  status_create:subCategoriesdata.status_create != null ? subCategoriesdata.status_create : false,
+                }
+                this.push('subCategories', objsub);
+
+              }
+
+          }
+
+
+
+
+
+        }
+
+        _handleErrorResponse(event) {
+
+          if (event.detail.request.status == 400) {
+            swal.fire({
+              icon: 'error',
+              title: "Ooooh cielos...",
+              text: "La sesión ha expirado, vuelve a iniciar sesión.",
+              type: 'error',
+              showCancelButton: false,
+              showConfirmButton: false
+            })
+            setTimeout(function () {
+              window.location.reload(1);
+            }, 5000);
+          }
+
+        }
+
+
+        _stringBody() {
+          return {
+            user_email: sessionStorage.getItem("user_email"),
+            token: sessionStorage.getItem("tokenIBM")
+          };
+        }
+        _getCategoryObject(categoryName) {
+          for (let i = 0, c; c = this.categories[i]; ++i) {
+            if (c.name === categoryName) {
+              return c;
+            }
+          }
+        }
+
+        _computeCategory(categoryName) {
+          // Fetch the items of the category. Note that the fetch is asynchronous,
+          // which means `category.items` may not be set initially (but that path
+          // will be notified when the fetch completes).
+          let categoryObj = this._getCategoryObject(categoryName);
+          this._fetchItems(categoryObj, 1);
+          return categoryObj;
+        }
+
+        _computeItem(items, itemName) {
+          if (!items || !itemName) {
+            return;
+          }
+          for (let i = 0, item; item = items[i]; ++i) {
+            if (item.name === itemName) {
+              return item;
+            }
+          }
+        }
+
+        _fetchItems(category, attempts) {
+           this._setFailure(false);
+
+          // Only fetch the items of a category if it has not been previously set.
+          if (!category || category.items) {
+
+            return;
+          }
+
+
+
+          /* if(this.item.id_campaign.substring(0,2)=="01")
+         {
+           alert("si bueno")
+           flagForDon=false
+         }*/
+
+          this.set('subCategoriesShow', []);
+          for (let subCategoriesdata of this.subCategories) {
+            if (category.category_id == subCategoriesdata.id_campaign.substring(0, 2)) {
+              var objsub =
+              {
+                id_campaign: subCategoriesdata.id_campaign,
+                name: subCategoriesdata.title.replace(/\s/g, "+"),
+                title: subCategoriesdata.title,
+                category: subCategoriesdata.category,
+                price: 13.30,
+                description: "this one little boy",
+                image: subCategoriesdata.image,
+                largeImage: subCategoriesdata.largeImage,
+                name_campaign: subCategoriesdata.name_campaign,
+                flagForDon: subCategoriesdata.id_campaign.substring(0, 2) == "04" ? true : false,
+                status_campaign: subCategoriesdata.status_campaign,
+                status_create:subCategoriesdata.status_create
+
+              }
+             
+              this.push('subCategoriesShow', objsub);
+            }
+          }
+
+          this._getResource({
+            url: 'data/' + category.name + '.json',
+            onLoad(e) {
+
+              this.set('category.items', this.subCategoriesShow);
+            },
+            onError(e) {
+              this._setFailure(true);
+            }
+          }, attempts);
+        }
+
+        _getResource(rq, attempts) {
+
+          let xhr = new XMLHttpRequest();
+          xhr.addEventListener('load', rq.onLoad.bind(this));
+
+          xhr.addEventListener('error', (e) => {
+            // Flaky connections might fail fetching resources
+            if (attempts > 1) {
+              this._getResourceDebouncer = Polymer.Debouncer.debounce(this._getResourceDebouncer,
+                Polymer.Async.timeOut.after(200), this._getResource.bind(this, rq, attempts - 1));
+            } else {
+              rq.onError.call(this, e);
+            }
+          });
+
+          xhr.open('GET', rq.url);
+          xhr.send();
+        }
+
+        refresh() {
+          if (this.categoryName) {
+            // Try at most 3 times to get the items.
+            this._fetchItems(this._getCategoryObject(this.categoryName), 3);
+          }
+        }
+
+
+      }
+
+      customElements.define(ShopCategoryData.is, ShopCategoryData);
+
+    })();
+  </script>
+
+</dom-module>
