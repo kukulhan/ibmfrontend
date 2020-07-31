@@ -59,7 +59,9 @@ The next step is that the user who has created your help campaign, can put all t
 ### Community on Twitter
 **Twitter** has become the main means of citizen expression. Therefore, the analysis is important to observe the degree of citizen participation on news content on Twitter, based on the quantification of their interactions and interests of people. Through our platform we help these people to call new volunteers to support, and that Twitter searches for potential volunteers and sends them an invitation so they can contribute to the support. Twitter has also allowed activist groups to raise awareness and mobilize even those not affected by the cause of the activists. This search for the behavior of people on Twitter according to an analysis of key words interest and realized that the person uses in their social network. Businesses, organizations and even governments have used social networks to reach a broader and influence public behavior.
 
-Therefore, we offer a solution to effectively target aid to the entire affected community. Providing the opportunity for people to create post-disaster social aid communities, with activist volunteers with a Twitter account without the need to create an account on this social network. Therefore, the user is asked to place hashtags that I considered relevant in the search.If the user has no idea how to put these hashtags, IBM Watson assistant will help in the process.
+Therefore, we offer a solution to effectively target aid to all affected community. Providing the opportunity for people to create post-disaster social aid communities, with activist volunteers with a Twitter account without the need to create an account on this social network. Then, the user is asked to put hashtags that they considered relevant in the search. If the user has no idea how to put these hashtags, IBM Watson assistant will help in the process.
+
+**This in order to help people who have never used a social network such as Twitter.**
 
 ## Which are the next steps?
 
