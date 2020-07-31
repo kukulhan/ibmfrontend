@@ -39,4 +39,4 @@ And you can use the Polymer wrapped with NodeJS just following the next command:
 
 Note: This configuration you can see in the file server.js
 
-And finally this project execute on serves the app at 'http://localhost:3000/'.
+And finally this project execute on serves the app at `http://localhost:3000/`.
