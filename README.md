@@ -22,9 +22,13 @@ And for future development we will develop ...
 ## Get started
 
 * [Know us](#know-us)
+* [Setting up the solution](#setting-up-the-solution)
 
 ## Know us
 Watch the video below to understand our solution:
+
+## Setting up the solution
+See [SETUP.md](SETUP.md)
 
 Install [Polymer CLI](https://github.com/Polymer/polymer-cli) using
 [npm](https://www.npmjs.com) (we assume you have pre-installed [node.js](https://nodejs.org)).
