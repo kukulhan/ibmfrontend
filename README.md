@@ -84,9 +84,13 @@ And we detect the things that were most requested.
 * Construction tools
 * Psychological help
 
-Then, we add three hashtags that we consider most relevant in relation to our analysis.
+Then we added three hashtags in the user campaign that we consider most relevant in relation to our analysis. These hashtags will later serve us to search for potential activists on Twitter.
 
 # ![kukulhan](/resources/images/mongo_campaign.png?raw=true)
+
+Finally, the user is informed that they have successfully created their campaign. And our platform will now be in charge of analyzing and searching for people on Twitter who are interested in offering their help and can segment and group these activists. Where us through the Twitter API, once identified these people, we send them an invitation by a direct message to their profile.
+
+# ![kukulhan](/resources/images/api_twitter.png?raw=true)
 
 ## Which are the next steps?
 
