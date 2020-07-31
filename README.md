@@ -92,6 +92,10 @@ Finally, the user is informed that they have successfully created their campaign
 
 # ![kukulhan](/resources/images/api_twiter.png?raw=true)
 
+Our application saves the users that have been selected by our analysis. Users are grouped depending on the type of help and it is related to the message sent.
+
+# ![kukulhan](/resources/images/mongo_message.png?raw=true)
+
 ## Which are the next steps?
 
 ## Technologies used
