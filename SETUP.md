@@ -42,6 +42,8 @@ Initialize project from template
 
 And finally this project execute on serves the app at `http://localhost:3000/`.
 
+    npm start
+
 ### Twitter:
 You need create an account in **Twitter Developer Labs** for you can configure your own credentials an put this values in the environment variables (file .env)
 For more information...[api twitter](https://developer.twitter.com/en)

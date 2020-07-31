@@ -50,18 +50,41 @@ Our application has the ability to create help through campaigns with people who
 
 In these categories we analyze the data from Mexico City happened in the earthquake on September 19, 2017, which made international news and was affected many Mexican families.
 
-To give an example, in the rubble category we detected that people on Twitter were retweeting and responding that a certain location needed tools and volunteers to remove the buildings that were destroyed by the earthquake.
+For example, in the rubble category we detected that people on Twitter were retweeting and responding that a certain location needed tools and volunteers to remove the buildings that were destroyed by the earthquake.
 
-The next step is that the user who has created your help campaign, can put all the information that it considers relevant, such as the address where they need help, the description of the need for the town and the duration of their campaign can be between 24 hours. at 72 hrs.
+The next step is that the user who has created your help campaign, can put all the information that it considers relevant, such as the address where they need help, the description of the need for the town and the duration of their campaign can be between 24 hrs. at 72 hrs.
 
 # ![kukulhan](/resources/images/13.png?raw=true)
 
 ### Community on Twitter
 **Twitter** has become the main means of citizen expression. Therefore, the analysis is important to observe the degree of citizen participation on news content on Twitter, based on the quantification of their interactions and interests of people. Through our platform we help these people to call new volunteers to support, and that Twitter searches for potential volunteers and sends them an invitation so they can contribute to the support. Twitter has also allowed activist groups to raise awareness and mobilize even those not affected by the cause of the activists. This search for the behavior of people on Twitter according to an analysis of key words interest and realized that the person uses in their social network. Businesses, organizations and even governments have used social networks to reach a broader and influence public behavior.
 
-Therefore, we offer a solution to effectively target aid to all affected community. Providing the opportunity for people to create post-disaster social aid communities, with activist volunteers with a Twitter account without the need to create an account on this social network. Then, the user is asked to put hashtags that they considered relevant in the search. If the user has no idea how to put these hashtags, IBM Watson assistant will help in the process.
+Therefore, we offer a solution to effectively target aid to all affected community. Providing the opportunity for people to create post-disaster social aid communities, with activist volunteers with a Twitter account without the need to create an account on this social network. Then, the user is asked to put hashtags that they considered relevant in the search. If the user has no idea how to put these hashtags, **IBM Watson assistant** will help in the process.
 
 **This in order to help people who have never used a social network such as Twitter.**
+
+Also, we took information and data regarding the earthquake of September 19 in Mexico City, which was one of the most affected areas. And according to our analysis, the most relevant hashtags:
+
+**Relevant Hastags**
+
+* #Sismo
+* #19s
+* #Ayuda
+* #sismo19s
+* #19septiembre
+* #FuerzaMexico
+* #AyudaSismo
+
+And we detect the things that were most requested.
+
+* Rubble collection
+* Transport
+* Nonperishable food
+* First aid kits
+* Construction tools
+* Psychological help
+
+
 
 ## Which are the next steps?
 
