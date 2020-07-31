@@ -38,12 +38,23 @@ See [SETUP.md](SETUP.md)
 
 ## How does our solution work?
 
+### Ask for help
+Our application has the ability to create help through campaigns with people who want to help their community on our platform, in four categories:
+
+* Debris
+* Supplies
+* Health
+* Donation
+
+# ![kukulhan](/resources/images/5.png?raw=true)
+
 ## Which are the next steps?
 
 ## Technologies used
 
 ## Authors
 * Hebert Velázquez
+* Joatham Baez
 * Saúl Rodríguez
 
 ## Acknowledgments
