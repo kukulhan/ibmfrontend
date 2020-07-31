@@ -84,7 +84,9 @@ And we detect the things that were most requested.
 * Construction tools
 * Psychological help
 
+Then, we add three hashtags that we consider most relevant in relation to our analysis.
 
+# ![kukulhan](/resources/images/mongo_campaign.png?raw=true)
 
 ## Which are the next steps?
 
