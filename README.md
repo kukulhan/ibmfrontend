@@ -16,8 +16,15 @@ Iknelia uses 6 different components:
 And for future development we will develop ...
 7. [IBM Watson Studio](SETUP.md#ibm-watson-studio)
 
-
+## Diagram
 # ![kukulhan](/resources/images/presentation.png?raw=true)
+
+## Get started
+
+* [Know us](#know us)
+
+## Know us
+Watch the video below to understand our solution:
 
 Install [Polymer CLI](https://github.com/Polymer/polymer-cli) using
 [npm](https://www.npmjs.com) (we assume you have pre-installed [node.js](https://nodejs.org)).
