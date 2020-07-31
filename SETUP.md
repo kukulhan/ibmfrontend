@@ -1,7 +1,7 @@
 # Setup
 
 ## Pre-requisites
-### Front-End:
+## Front-End:
 To run the front-end is required to clone the repository.
 
     git clone https://github.com/kukulhan/ibmfrontend.git
@@ -29,7 +29,7 @@ This command serves the app at `http://127.0.0.1:8081` and provides basic URL ro
 
     polymer serve
 
-### Back-End:
+## Back-End:
 To run the back-end is required to clone the repository.
 
     git clone https://github.com/kukulhan/imbbackend.git
@@ -52,7 +52,7 @@ Also, you need create an account in **IBM Watson Assistant** and put your own cr
 ### Database MongoDB:
 You need create a database, in this project we made a cluster in **MongoDB Atlas Cloud**. For more information...[mongodb](https://www.mongodb.com/cloud/atlas)
 
-### Create a container with Docker:
+## Create a container with Docker:
 We separate front and back in different containers, so each architecture has the configuration for you can deploy own project in docker.
 This configuration are in the file dockerfile. (We assume you have pre-installed [docker](https://docs.docker.com/engine/install/))
 
