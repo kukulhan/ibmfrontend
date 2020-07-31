@@ -21,7 +21,7 @@ And for future development we will develop ...
 
 ## Get started
 
-* [Know us](#know us)
+* [Know us](#know-us)
 
 ## Know us
 Watch the video below to understand our solution:
