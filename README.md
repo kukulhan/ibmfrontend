@@ -90,7 +90,7 @@ Then we added three hashtags in the user campaign that we consider most relevant
 
 Finally, the user is informed that they have successfully created their campaign. And our platform will now be in charge of analyzing and searching for people on Twitter who are interested in offering their help and can segment and group these activists. Where us through the Twitter API, once identified these people, we send them an invitation by a direct message to their profile.
 
-# ![kukulhan](/resources/images/api_twitter.png?raw=true)
+# ![kukulhan](/resources/images/api_twiter.png?raw=true)
 
 ## Which are the next steps?
 
