@@ -25,6 +25,10 @@ And for future development we will develop ...
 * [Setting up the solution](#setting-up-the-solution)
 * [How does our solution work?](#how-does-our-solution-work)
 * [Which are the next steps?](#which-are-the-next-steps)
+* [Technologies used](#technologies-used)
+* [Authors](#authors)
+* [Acknowledgments](#acknowledgments)
+
 
 ## Know us
 Watch the video below to understand our solution:
@@ -35,3 +39,12 @@ See [SETUP.md](SETUP.md)
 ## How does our solution work?
 
 ## Which are the next steps?
+
+## Technologies used
+
+## Authors
+* Hebert Velázquez
+* Saúl Rodríguez
+
+## Acknowledgments
+* We are grateful to IBM for allowing us to participate in this challenge where we learned throughout development. And we hope that regardless of our performance, we hope to contribute something to the community :)
