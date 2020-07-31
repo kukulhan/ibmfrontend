@@ -48,6 +48,18 @@ Our application has the ability to create help through campaigns with people who
 
 # ![kukulhan](/resources/images/5.png?raw=true)
 
+In these categories we analyze the data Mexico happened in the earthquake on September 19, 2017, which made international news and was affected many Mexican families.
+
+To give an example, in the rubble category we detected that people on Twitter were retweeting and responding that a certain location needed tools and volunteers to remove the buildings that were destroyed by the earthquake.
+
+The next step is that the user who has created your help campaign, can put all the information that it considers relevant, such as the address where they need help, the description of the need for the town and the duration of their campaign can be between 24 hours. at 72 hrs.
+
+# ![kukulhan](/resources/images/13.png?raw=true)
+
+Twitter has become the main means of citizen expression. Therefore, the analysis is important to observe the degree of citizen participation on news content on Twitter, based on the quantification of their interactions and interests of people. Through our platform we help these people to call new volunteers to support, and that Twitter searches for potential volunteers and sends them an invitation so they can contribute to the support. Twitter has also allowed activist groups to raise awareness and mobilize even those not affected by the cause of the activists. This search for the behavior of people on Twitter according to an analysis of key words interest and realized that the person uses in their social network. Businesses, organizations and even governments have used social networks to reach a broader and influence public behavior.
+
+So we provide as a solution is to effectively target these types of aid to the affected community.
+
 ## Which are the next steps?
 
 ## Technologies used
