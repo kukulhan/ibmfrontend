@@ -2,7 +2,6 @@
 The history of Mexico in natural disasters has been catastrophic if we talk about earthquakes.The project of 'Iknelia' we give a strategic solution so that people can help others who unfortunately were affected by this natural disaster.
 
 Our solution is through a web or device mobile browser people can create campaigns help you through the analysis and understanding of the kind of people on Twitter (including retweets, publications, mentions and other responses) send a direct message to through this social network to invite you to be part of the campaigns that were created through Iknelia.
-
 ##### Prerequisites
 
 Install [Polymer CLI](https://github.com/Polymer/polymer-cli) using
