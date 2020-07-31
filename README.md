@@ -13,7 +13,7 @@ Iknelia uses 6 different components:
 5. [IBM Watson Assistant](SETUP.md#ibm-watson-assistant)
 6. [IBM Cloud Kubernetes Service](SETUP.md#ibm-cloud-kubernetes-service)
 
-And to develop...
+And for future development we will develop ...
 7. [IBM Watson Studio](SETUP.md#ibm-watson-studio)
 
 
