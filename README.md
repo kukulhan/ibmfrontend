@@ -23,7 +23,8 @@ And for future development we will develop ...
 
 * [Know us](#know-us)
 * [Setting up the solution](#setting-up-the-solution)
-* [What does our project do?](#what-does-our-project-do?)
+* [How does our solution work?](#how-does-our-solution-work?)
+* [Which are the next steps?](#which-are-the-next-steps?)
 
 ## Know us
 Watch the video below to understand our solution:
@@ -31,4 +32,6 @@ Watch the video below to understand our solution:
 ## Setting up the solution
 See [SETUP.md](SETUP.md)
 
-## What-does-our-project-do?
+## How does our solution work?
+
+## Which are the next steps?
