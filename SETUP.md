@@ -35,10 +35,8 @@ If you prefer to compile our project in Polymer you must compile it with the nex
 
 And you can use the Polymer wrapped with NodeJS just following the next command:
 
-    polymer start
+    npm start
 
 Note: This configuration you can see in the file server.js
 
-And finally this project execute on serves the app at 'http://localhost:3000/', so you need execute the next command:
-
-    npm start
+And finally this project execute on serves the app at 'http://localhost:3000/'.
