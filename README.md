@@ -151,4 +151,4 @@ Our development at Jupyter, see [earthq_data.ipynb](/data/earthq_data_analyst.ip
 ## Acknowledgments
 * We are grateful to IBM for allowing us to participate in this challenge where we learned about IBM Technologies throughout development. And we hope that regardless of our performance, we hope to contribute something to the community :)
 
-* I'm grateful to Cynthia Maldonado, a great friend and for helping me in correcting the text by Saul. 
+* I'm grateful to Cynthia Maldonado, a great friend and for helping me in correcting the text. -Saul. 
