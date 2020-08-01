@@ -33,6 +33,12 @@ And for future development we will develop ...
 ## Know us
 Watch the video below to understand our solution:
 
+[![](http://img.youtube.com/vi/vOgCOoy_Bx0/0.jpg)](http://www.youtube.com/watch?v=vOgCOoy_Bx0)
+
+Demo project
+
+[![](http://img.youtube.com/vi/vOgCOoy_Bx0/0.jpg)](http://www.youtube.com/watch?v=vOgCOoy_Bx0)
+
 ## Setting up the solution
 See [SETUP.md](SETUP.md)
 
@@ -151,4 +157,4 @@ Our development at Jupyter, see [earthq_data.ipynb](/data/earthq_data_analyst.ip
 ## Acknowledgments
 * We are grateful to IBM for allowing us to participate in this challenge where we learned about IBM Technologies throughout development. And we hope that regardless of our performance, we hope to contribute something to the community :)
 
-* I'm grateful to Cynthia Maldonado, a great friend and for helping me in correcting the text. -Saul. 
+* I'm grateful to Cynthia Maldonado, a great friend and for helping me in correcting the text. -Saul.
