@@ -77,15 +77,6 @@ Also, we took information and data regarding the earthquake of September 19 in M
 * #FuerzaMexico
 * #AyudaSismo
 
-And we detect the things that were most requested.
-
-* Rubble collection
-* Transport
-* Nonperishable food
-* First aid kits
-* Construction tools
-* Psychological help
-
 Then we added three hashtags in the user campaign that we consider most relevant in relation to our analysis. These hashtags will later serve us to search for potential activists on Twitter.
 
 # ![kukulhan](/resources/images/mongo_campaign.png?raw=true)
@@ -106,7 +97,18 @@ At last, the users can see all campaign from other people. And these people can 
 
 The topic we choose, our tone, our selection of words, everything adds some type of information that can be interpreted and value extracted from it. In theory, we can understand and even predict human behaviour using that information. But there is a problem: one person may generate hundreds or thousands of words in a declaration, each sentence with its corresponding complexity. Nevertheless, thanks to the advances in disciplines like machine learning a big revolution is going on regarding this topic.
 
-Natural Language Processing or NLP is a field of **Artificial Intelligence** that gives the machines the ability to read, understand and derive meaning from human languages. It is a discipline that focuses on the interaction between data science and human language, and is scaling to lots of industries
+Natural Language Processing or NLP is a field of **Artificial Intelligence** that gives the machines the ability to read, understand and derive meaning from human languages. It is a discipline that focuses on the interaction between data science and human language, and is scaling to lots of industries.
+
+We cleaned the data, and it was possible to identify the relevant words. With this we discovered that it is the most requested as aid related to an earthquake and we also segment hashtags related to these requests. Furthermore, We also identify who the interested people are to help, and how the support roles interact. We finally identify the categories of help and that this helped us to implement it in our project.
+
+* Rubble collection
+* Transport
+* Nonperishable food
+* First aid kits
+* Construction tools
+* Psychological help
+
+Our development at Jupyter, see [earthq_data.ipynb](/data/earthq_data_analyst.ipynb)
 
 ## Which are the next steps?
 
