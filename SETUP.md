@@ -21,7 +21,7 @@ Initialize project from template
 
 ### Start the development server
 
-You need install all dependencies (we assume you have pre-installed [bower](https://bower.io/)).
+You need to install all dependencies (we assume you have pre-installed [bower](https://bower.io/)).
 
     bower install
 
@@ -45,38 +45,38 @@ And finally this project execute on serves the app at `http://localhost:3000/`.
     npm start
 
 ### Twitter:
-You need create an account in **Twitter Developer Labs** for you can configure your own credentials an put this values in the environment variables (file .env)
+You need to create an account on **Twitter Developer Labs** in order to configure your own credentials an put this values in the environment variables (file .env)
 For more information...[api twitter](https://developer.twitter.com/en)
 
 ### IBM Watson Assistant:
-Also, you need create an account in **IBM Watson Assistant** and put your own credentials. For more information...[ibm watson](https://www.ibm.com/cloud/watson-assistant/)
+Also, you need to create an account on **IBM Watson Assistant** and put your own credentials. For more information...[ibm watson](https://www.ibm.com/cloud/watson-assistant/)
 
 ### Database MongoDB:
-You need create a database, in this project we made a cluster in **MongoDB Atlas Cloud**. For more information...[mongodb](https://www.mongodb.com/cloud/atlas)
+You need to create a database, in this project we made a cluster on **MongoDB Atlas Cloud**. For more information...[mongodb](https://www.mongodb.com/cloud/atlas)
 
 ## Create a container with Docker:
-We separate front and back in different containers, so each architecture has the configuration for you can deploy own project in docker.
-This configuration are in the file dockerfile. (We assume you have pre-installed [docker](https://docs.docker.com/engine/install/))
+We separate front and back in different containers. Each architecture has the configuration for deploying you own project at Docker.
+This configuration is in the file dockerfile. (We assume you have pre-installed [docker](https://docs.docker.com/engine/install/))
 
-Therefore, you need compile our **Front-End** in Polymer with the next command:
+Therefore, you need to compile our **Front-End** in Polymer with the next command:
 
     polymer build
 
-This project was configured the Polymer wrapped with NodeJS just following the next command (This step it's not necessary):
+This project was configured by Polymer and wrapped by NodeJS (This step it is not necessary):
 
     npm start
 
-Note: This configuration you can see in the file server.js The project execute on serves the app at `http://localhost:3000/`.
+Note: This configuration you can see in the file server.js The project executes in the server at `http://localhost:3000/`.
 
 Then build the project in docker:
 
     docker build -t iknelia/frontend .
 
-We need change the project's port on serves the app at `http://localhost:3001/`.
+We need to change the project's port in the server at `http://localhost:3001/`.
 
     docker run -p 3001:3000 -d iknelia/frontend
 
-And you need compile our **Back-End** in Docker with the next command:
+And you need to compile our **Back-End** in Docker with the next command:
 
     docker build -t iknelia/backend .
 
@@ -84,7 +84,7 @@ We don't need change the project's port on serves.
 
     docker run -p 3000:3000 -d iknelia/backend
 
-You can verify the containers is executing with:
+You can verify that the containers is running with:
 
     docker ps
 

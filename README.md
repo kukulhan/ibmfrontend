@@ -39,7 +39,7 @@ See [SETUP.md](SETUP.md)
 ## How does our solution work?
 
 ### Ask for help
-Our application has the ability to create help through campaigns with people who want to help their community on our platform, in four categories:
+Our application is able to send efficient help to the victims by earthquakes throught campaigns designed on our platform. We have 4 categories..
 
 * Debris
 * Supplies
@@ -48,9 +48,9 @@ Our application has the ability to create help through campaigns with people who
 
 # ![kukulhan](/resources/images/5.png?raw=true)
 
-In these categories we analyze the data from Mexico City happened in the earthquake on September 19, 2017, which made international news and was affected many Mexican families.
+Those categories we analyze the Mexico City data happened in the earthquake on September 19, 2017, which made international news and was affected many Mexican families.
 
-For example, in the rubble category we detected that people on Twitter were retweeting and responding that a certain location needed tools and volunteers to remove the buildings that were destroyed by the earthquake.
+For instance, in the rubble category we detected that people on Twitter were retweeting and responding that a certain location needed tools and volunteers to remove the buildings that were destroyed by the earthquake.
 
 The next step is that the user who has created your help campaign, can put all the information that it considers relevant, such as the address where they need help, the description of the need for the town and the duration of their campaign can be between 24 hrs. at 72 hrs.
 
@@ -108,4 +108,4 @@ Our application saves the users that have been selected by our analysis. Users a
 * Saúl Rodríguez
 
 ## Acknowledgments
-* We are grateful to IBM for allowing us to participate in this challenge where we learned throughout development. And we hope that regardless of our performance, we hope to contribute something to the community :)
+* We are grateful to IBM for allowing us to participate in this challenge where we learned about IBM Technologies throughout development. And we hope that regardless of our performance, we hope to contribute something to the community :)
