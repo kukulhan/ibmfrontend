@@ -133,7 +133,7 @@ Our development at Jupyter, see [earthq_data.ipynb](/data/earthq_data_analyst.ip
 
 * API Twitter (API): It is an API to be able to consult more explicit information about what happens on Twitter.
 
-* IBM Watson assistant (Cloud Service): Watson Assistant is a conversation AI platform that helps you provide customers fast, straightforward and accurate answers to their questions, across any application, device or channel. For our project we use this wizard to resolve the doubts that arise on our platform. What we are looking for with Watson is to answer questions about an aid campaign, hashtags, the information we are looking for, ask about emergency numbers and the nearest hospitals. But the most important use is to reference the strategic points of the collection centers that are located in Mexico City, this in order to complement more points of support for our users.
+* **IBM Watson assistant** (Cloud Service): Watson Assistant is a conversation AI platform that helps you provide customers fast, straightforward and accurate answers to their questions, across any application, device or channel. For our project we use this wizard to resolve the doubts that arise on our platform. What we are looking for with Watson is to answer questions about an aid campaign, hashtags, the information we are looking for, ask about emergency numbers and the nearest hospitals. But the most important use is to reference the strategic points of the collection centers that are located in Mexico City, this in order to complement more points of support for our users.
 
 # ![kukulhan](/resources/images/watson_acopio.png?raw=true)
 
@@ -141,7 +141,7 @@ Our development at Jupyter, see [earthq_data.ipynb](/data/earthq_data_analyst.ip
 
 * Jupyter Notebook (Data science): With data analysis/science making the news these days, we have ipython based jupyter notebooks that are being used by beginners and experts alike. The kernel provides the multiple language support to Jupyter notebooks(R, Python, Julia, Java, etc)
 
-* Docker:
+* Docker (Containers): A Docker container image is a lightweight, standalone, executable package of software that includes everything needed to run an application: code, runtime, system tools, system libraries and settings. We have already set up both Front-End and Back-End in Dockers and later can be deployed on **IBM Cloud Service Kubernetes**.
 
 ## Authors
 * Hebert Velázquez
