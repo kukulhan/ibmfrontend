@@ -129,6 +129,8 @@ Our development at Jupyter, see [earthq_data.ipynb](/data/earthq_data_analyst.ip
 - [ ] Improve search and data analysis algorithms.
 - [ ] We will do volume and request tests on services already deployed in the IBM cloud.
 
+# ![kukulhan](/resources/images/presentation_3.png?raw=true)
+
 ## Technologies used
 
 * Polymer (Front-End): The polymer is JavaScript libraries created to support a component-oriented approach to front-end web development. A polymer is an open-source JavaScript library use for developing web-based applications using web components. Created by Google developers and contributors on GitHub, Polymer JavaScript library is built using JavaScript and HTML.
