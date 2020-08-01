@@ -102,7 +102,7 @@ At last, the users can see all campaign from other people. And these people can 
 
 # ![kukulhan](/resources/images/23.png?raw=true)
 
-### Data analytic: Natural Language Processing (NLP)
+### Data science: Natural Language Processing (NLP)
 
 The topic we choose, our tone, our selection of words, everything adds some type of information that can be interpreted and value extracted from it. In theory, we can understand and even predict human behaviour using that information. But there is a problem: one person may generate hundreds or thousands of words in a declaration, each sentence with its corresponding complexity. Nevertheless, thanks to the advances in disciplines like machine learning a big revolution is going on regarding this topic.
 
