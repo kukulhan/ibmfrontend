@@ -1,7 +1,7 @@
 # ![kukulhan](/resources/images/iknelia.png?raw=false)
-The history of Mexico in natural disasters has been catastrophic if we talk about earthquakes.The project of 'Iknelia' we give a strategic solution so that people can help others who unfortunately were affected by this natural disaster.
+Mexico has had a tragic experience when it comes to earthquakes. Proof of this have been the earthquakes of September 19, 1985 and 2017. In which the importance of timely and efficient aid was noted. The project of 'Iknelia' we give a strategic solution so that people can help others who unfortunately were affected by this natural disaster.
 
-Our solution is through a web or device mobile browser people can create campaigns help you through the analysis and understanding of the kind of people on Twitter (including retweets, publications, mentions and other responses) send a direct message to through this social network to invite you to be part of the campaigns that were created through Iknelia.
+‘Iknelia’ was born as a strategic solution to improve the way that people send their help to others who unfortunately has been affected by natural disasters as earthquakes.  ‘Iknelia’ is based on a web/ device mobile browser through people can design and accomplish campaigns whose objective is to send efficient aid to vulnerable groups. Iknelia is able to link potential helpers with the most affected, avoiding a saturation of unnecessary supports in the same affected groups. To achieve this, our solution analyzes the data found on Twitter such as retweets, publications, mentions, hashtags, etc. After analyzing the data, Iknelia sends a direct message to Twitter to boost aid.
 
 ## Iknelia team proposes
 
@@ -61,6 +61,8 @@ The next step is that the user who has created your help campaign, can put all t
 
 Therefore, we offer a solution to effectively target aid to all affected community. Providing the opportunity for people to create post-disaster social aid communities, with activist volunteers with a Twitter account without the need to create an account on this social network. Then, the user is asked to put hashtags that they considered relevant in the search. If the user has no idea how to put these hashtags, **IBM Watson assistant** will help in the process.
 
+# ![kukulhan](/resources/images/watson.png?raw=true)
+
 **This in order to help people who have never used a social network such as Twitter.**
 
 Also, we took information and data regarding the earthquake of September 19 in Mexico City, which was one of the most affected areas. And according to our analysis, the most relevant hashtags:
@@ -88,7 +90,7 @@ Then we added three hashtags in the user campaign that we consider most relevant
 
 # ![kukulhan](/resources/images/mongo_campaign.png?raw=true)
 
-Finally, the user is informed that they have successfully created their campaign. And our platform through algorithms will analyze and search for people on Twitter who are interested in offering their help and can segment and group these activists. Where us through the Twitter API, once identified these people, we send them an invitation by a direct message to their profile.
+Finally, the user is informed that they have successfully created their campaign. And our platform through algorithms will analyze and search for people on Twitter who are interested in offering their help and can segment and group these activists. Where us through the **Twitter API**, once identified these people, we send them an invitation by a direct message to their profile.
 
 # ![kukulhan](/resources/images/api_twiter.png?raw=true)
 
