@@ -98,7 +98,22 @@ Our application saves the users that have been selected by our analysis. Users a
 
 # ![kukulhan](/resources/images/mongo_message.png?raw=true)
 
+At last, the users can see all campaign from other people. And these people can be sympathizers with the aid. We provide them with contact information for the person who created the aid campaign.
+
+# ![kukulhan](/resources/images/23.png?raw=true)
+
 ## Which are the next steps?
+
+### In the future, we are aiming to do:
+
+- [ ] Monitor the behavior of people on Twitter in real time, with the implementation of **IBM Watson Studio** using our analytical model of data in the cloud.
+- [ ] Explore other natural disasters that our platform can help (hurricane or wildfire)
+- [ ] Deploy the project in the cloud with **IBM Cloud Kubernetes Service**, because our project is already compiled with **Dockers** in our local environment.
+
+### Longer term goals are:
+
+- [ ] Improve search and data analysis algorithms.
+- [ ] We will do volume and request tests on services already deployed in the IBM cloud.
 
 ## Technologies used
 
