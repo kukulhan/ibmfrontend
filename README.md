@@ -33,11 +33,10 @@ And for future development we will develop ...
 ## Know us
 Watch the video below to understand our solution:
 
-[![](http://img.youtube.com/vi/vOgCOoy_Bx0/0.jpg)](http://www.youtube.com/watch?v=vOgCOoy_Bx0)
 
 Demo project
 
-[![](http://img.youtube.com/vi/vOgCOoy_Bx0/0.jpg)](http://www.youtube.com/watch?v=vOgCOoy_Bx0)
+[![](https://img.youtube.com/vi/2WI9CHF4hOg/0.jpg)](https://www.youtube.com/watch?v=2WI9CHF4hOg)
 
 ## Setting up the solution
 See [SETUP.md](SETUP.md)
