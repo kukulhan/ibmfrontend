@@ -102,6 +102,12 @@ At last, the users can see all campaign from other people. And these people can 
 
 # ![kukulhan](/resources/images/23.png?raw=true)
 
+### Data analytic: Natural Language Processing (NLP)
+
+The topic we choose, our tone, our selection of words, everything adds some type of information that can be interpreted and value extracted from it. In theory, we can understand and even predict human behaviour using that information. But there is a problem: one person may generate hundreds or thousands of words in a declaration, each sentence with its corresponding complexity. Nevertheless, thanks to the advances in disciplines like machine learning a big revolution is going on regarding this topic.
+
+Natural Language Processing or NLP is a field of **Artificial Intelligence** that gives the machines the ability to read, understand and derive meaning from human languages. It is a discipline that focuses on the interaction between data science and human language, and is scaling to lots of industries
+
 ## Which are the next steps?
 
 ### In the future, we are aiming to do:
@@ -116,6 +122,24 @@ At last, the users can see all campaign from other people. And these people can 
 - [ ] We will do volume and request tests on services already deployed in the IBM cloud.
 
 ## Technologies used
+
+* Polymer (Front-End): The polymer is JavaScript libraries created to support a component-oriented approach to front-end web development. A polymer is an open-source JavaScript library use for developing web-based applications using web components. Created by Google developers and contributors on GitHub, Polymer JavaScript library is built using JavaScript and HTML.
+
+* NodeJS (Back-End): Node.js is an open-source server side runtime environment built on Chrome's V8 JavaScript engine. Also, can be used to build different types of applications such as command line application, web application, real-time chat application, REST API server etc. For this reason it is easy to create our own APIs to be consumed by the Front-end.
+
+* Bcrypt (Security): The bcrypt hashing function allows us to build a password security platform that scales with computation power. We use it for security when the user enters our platform.
+
+* API Twitter (API): It is an API to be able to consult more explicit information about what happens on Twitter.
+
+* IBM Watson assistant (Cloud Service): Watson Assistant is a conversation AI platform that helps you provide customers fast, straightforward and accurate answers to their questions, across any application, device or channel. For our project we use this wizard to resolve the doubts that arise on our platform. What we are looking for with Watson is to answer questions about an aid campaign, hashtags, the information we are looking for, ask about emergency numbers and the nearest hospitals. But the most important use is to reference the strategic points of the collection centers that are located in Mexico City, this in order to complement more points of support for our users.
+
+# ![kukulhan](/resources/images/watson_acopio.png?raw=true)
+
+* MongoDB (Database No-SQL): Is a document-oriented No-SQL database used for high volume data storage. Instead of using tables and rows as in the traditional relational databases, MongoDB makes use of collections and documents.
+
+* Jupyter Notebook (Data science): With data analysis/science making the news these days, we have ipython based jupyter notebooks that are being used by beginners and experts alike. The kernel provides the multiple language support to Jupyter notebooks(R, Python, Julia, Java, etc)
+
+* Docker:
 
 ## Authors
 * Hebert Velázquez
